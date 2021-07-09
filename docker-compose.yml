@@ -1,6 +1,6 @@
 version: '3'
 
-services: #lista kontenerów
+services: #containers' list
 
   php:
     container_name: symfony_php
@@ -17,47 +17,31 @@ services: #lista kontenerów
     container_name: symfony_postgres
     image: postgres
     restart: always
+    hostname: symfony_postgres
     environment:
       POSTGRES_DB: root
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
+    ports:
+      - "6543:5432"
     volumes:
       - ./postgres:/var/lib/postgres
     networks:
       - symfony
 
-  phppgadmin:
+  pgadmin:
     container_name: symfony_pgadmin
-    image: dockage/phppgadmin:latest
+    image: dpage/pgadmin4
     restart: always
     ports:
-      - "81:80"
+      - "5555:80"
+    depends_on:
+      - database
     links:
       - database
     environment:
-      - PHP_PG_ADMIN_SERVER_DESC=PostgreSQL
-      - PHP_PG_ADMIN_SERVER_HOST=
-      - PHP_PG_ADMIN_SERVER_PORT=5432
-      - PHP_PG_ADMIN_SERVER_SSL_MODE=allow
-      - PHP_PG_ADMIN_SERVER_DEFAULT_DB=template1
-      - PHP_PG_ADMIN_SERVER_PG_DUMP_PATH=/usr/bin/pg_dump
-      - PHP_PG_ADMIN_SERVER_PG_DUMPALL_PATH=/usr/bin/pg_dumpall
-      - PHP_PG_ADMIN_DEFAULT_LANG=auto
-      - PHP_PG_ADMIN_AUTO_COMPLETE=default on
-      - PHP_PG_ADMIN_EXTRA_LOGIN_SECURITY=false
-      - PHP_PG_ADMIN_OWNED_ONLY=false
-      - PHP_PG_ADMIN_SHOW_COMMENTS=true
-      - PHP_PG_ADMIN_SHOW_ADVANCED=false
-      - PHP_PG_ADMIN_SHOW_SYSTEM=false
-      - PHP_PG_ADMIN_MIN_PASSWORD_LENGTH=1
-      - PHP_PG_ADMIN_LEFT_WIDTH=200
-      - PHP_PG_ADMIN_THEME=default
-      - PHP_PG_ADMIN_SHOW_OIDS=false
-      - PHP_PG_ADMIN_MAX_ROWS=30
-      - PHP_PG_ADMIN_MAX_CHARS=50
-      - PHP_PG_ADMIN_USE_XHTML_STRICT=false
-      - PHP_PG_ADMIN_HELP_BASE=http://www.postgresql.org/docs/%s/interactive/
-      - PHP_PG_ADMIN_AJAX_REFRESH=3
+      PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
+      PGADMIN_DEFAULT_PASSWORD: root
     networks:
       - symfony
 
@@ -81,14 +65,3 @@ services: #lista kontenerów
 networks:
   symfony:
 
-#  nginx:
-#    container_name: symfony_nginx
-#    build:
-#      context: .
-#      dockerfile: Dockerfile-nginx
-#    volumes:
-#      - ./symfony/:/var/www/symfony/
-#    ports:
-#      - "80:80"
-#    networks:
-#      - symfony
