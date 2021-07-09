@@ -66,9 +66,12 @@ services: #lista kontenerów
     image: nginx:stable-alpine
     ports:
       - '80:80'
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile-nginx
     volumes:
       - ./symfony:/var/www/symfony
-    #      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
     depends_on:
       - php
       - database
