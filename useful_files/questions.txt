@@ -1,0 +1,41 @@
+1)
+w symfony/src/Controller/ProductController.php mam funkcję, która apdejtuje dane i tam nie trzeba było użyć "$entityManager->persist($product);"
+Czy to persist jest tylko do insertowania do bazy danych?
+
+2) Z tego samego pliku co wyżej mam funckję deleteProduct  w linii nr 99 -
+Zrobiłam kopię obiektu żeby można wyświetlić co się usunęło i wszystkie dane z tego deleted_product sie wyświetlają oprócz id, które wyświetla się puste, dlaczego?
+
+3) jak używam extra-bundles czyli z tego co zrozumiałam, to jak w path jest "adres/{id}", to w funkcji można przyjmować jako parametr już cały produkt,
+a nie $id, bo doctrine sam sobie ogarnia, że chodzi o konkretny produkt o konkretnym id i wtedy zamiast:
+    public function blabla($id): Response
+    {
+        $product = $this->getDoctrine()
+            ->getRepository(Product::class)
+            ->find($id);
+
+        //do sth with $product
+
+mogę mieć:
+
+    public function blabla($product): Response
+    {
+        //do sth with $product
+
+I to działa, ale jak na przykład pod konkretnym ID nie ma nic, to wywala błędy -
+w jaki sposób można by to zwalidować, żeby sprawdzało, czy $product o określonym ID istnieje zanim wyrzuci czterysteki?
+
+4) tutaj ta walidacja:
+https://symfony.com/doc/4.4/doctrine.html#validating-objects:
+
+i ten fragment kodu:
+        $errors = $validator->validate($product);
+        if (count($errors) > 0) {
+            return new Response((string) $errors, 400);
+        }
+nie zmienia totalnie nic, taka sama strona z błędem się wyświetla np jak ustawiłam zmienna $name jako NULL,
+a w bazie ustawiłam ze to pole nie może byc NULL,
+ to po co to jest?
+
+ 5) jak np mam w bazie trzy produkty o id 1, 2, 6,
+ to doctrine tworzy następny element z autoincrement id = 7, a co jakbym chciała, żeby zapychał te usunięte id i jako nastęþne ustawił 3?
+

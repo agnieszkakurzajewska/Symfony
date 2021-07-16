@@ -7,7 +7,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class ProductController extends AbstractController
 {
@@ -15,7 +14,7 @@ class ProductController extends AbstractController
     /**
      * @Route("/products/add", name="add_product")
      */
-    public function addProduct(ValidatorInterface $validator): Response
+    public function addProduct(): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
 
@@ -28,6 +27,7 @@ class ProductController extends AbstractController
 
         // actually executes the queries (i.e. the INSERT query)
         $entityManager->flush();
+
 
         return $this->render("products_info.html.twig", [
             'message' => "A new product has been added to the database",
@@ -150,6 +150,3 @@ class ProductController extends AbstractController
     }
 
 }
-
-//jak uzywam extra bndle to juz wywala jak nie znajdzie produktu
-//dlaczego mi dodaje kolejne id mimo że te na początku usunęłam
