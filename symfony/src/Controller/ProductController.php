@@ -5,20 +5,14 @@ namespace App\Controller;
 use App\Entity\Product;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ProductController extends AbstractController
 {
     /**
-     * @Route("/product", name="product")
+     * @Route("/product", name="create_product")
      */
-    public function index(): Response
-    {
-        return $this->render('product/index.html.twig', [
-            'controller_name' => 'ProductController',
-        ]);
-    }
-
     public function createProduct(): Response
     {
         // you can fetch the EntityManager via $this->getDoctrine()
