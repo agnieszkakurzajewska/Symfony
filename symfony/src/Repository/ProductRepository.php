@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @method Product|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,6 +20,21 @@ class ProductRepository extends ServiceEntityRepository
         parent::__construct($registry, Product::class);
     }
 
+    public function findAllGreaterThanPrice(int $amount): array
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT p
+            FROM App\Entity\Product p
+            WHERE p.amount > :amount
+            ORDER BY p.amount ASC'
+        )->setParameter('amount', $amount);
+        ////////////////////////////////co oooooot ot jest ten dwukropek przed amount!!!!!!!!!!!!!!!!!!!!!!
+
+        // returns an array of Product objects
+        return $query->getResult();
+    }
     // /**
     //  * @return Product[] Returns an array of Product objects
     //  */

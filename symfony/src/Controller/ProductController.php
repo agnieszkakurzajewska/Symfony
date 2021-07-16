@@ -11,18 +11,17 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class ProductController extends AbstractController
 {
+
     /**
-     * @Route("/product", name="create_product")
+     * @Route("/products/add", name="add_product")
      */
-    public function createProduct(ValidatorInterface $validator): Response
+    public function addProduct(ValidatorInterface $validator): Response
     {
-        // you can fetch the EntityManager via $this->getDoctrine()
-        // or you can add an argument to the action: createProduct(EntityManagerInterface $entityManager)
         $entityManager = $this->getDoctrine()->getManager();
 
         $product = new Product();
-        $product->setName('Keyboard');
-        $product->setAmount(30);
+        $product->setName('Piano');
+        $product->setAmount(2);
 
         // tell Doctrine you want to (eventually) save the Product (no queries yet)
         $entityManager->persist($product);
@@ -30,34 +29,127 @@ class ProductController extends AbstractController
         // actually executes the queries (i.e. the INSERT query)
         $entityManager->flush();
 
-        $errors = $validator->validate($product);
-        if (count($errors) > 0) {
-            return new Response((string) $errors, 400);
-        }
+        return $this->render("products_info.html.twig", [
+            'message' => "A new product has been added to the database",
+            'product_id' => $product->getId(),
+            'product_name' => $product->getName(),
+            'product_amount' => $product->getAmount(),
+        ]);
+    }
 
-        return new Response('Saved new product with id '.$product->getId());
+
+    /**
+     * @Route("/products/show/{id}", name="show_product")
+     */
+    public function showProduct($id): Response
+    {
+
+        $product = $this->getDoctrine()
+            ->getRepository(Product::class)
+            ->find((int)$id);
+
+        if (!$product) {
+            return new Response('No product found for id '.$id);
+
+        }
+        return $this->render("show_product_data.html.twig", [
+            'product_id' => $product->getId(),
+            'product_name' => $product->getName(),
+            'product_amount' => $product->getAmount(),
+        ]);
     }
 
     /**
-     * @Route("/product/{id}", name="product_show")
+     * @Route("/products/available", name="show_available_products")
      */
-    public function show(int $id): Response
+    public function availableProducts(): Response
+    {
+        $products = $this->getDoctrine()
+            ->getRepository(Product::class)
+            ->findAllGreaterThanPrice(0);
+
+        return $this->render("show_multiple_products.html.twig", [
+            'message' => "Following products are available: ",
+            'products' => $products
+        ]);
+
+    }
+
+    /**
+     * @Route("/products/more-than-five", name="show_more_than_five_products")
+     */
+    public function moreThanFiveProducts(): Response
+    {
+        $products = $this->getDoctrine()
+            ->getRepository(Product::class)
+            ->findAllGreaterThanPrice(5);
+
+        return $this->render("show_multiple_products.html.twig", [
+            'message' => "Following products are available: ",
+            'products' => $products
+        ]);
+
+    }
+
+
+
+    /**
+     * @Route("/products/delete/{id}", name="delete_product")
+     */
+    public function deleteProduct($id): Response
     {
         $product = $this->getDoctrine()
             ->getRepository(Product::class)
             ->find($id);
 
         if (!$product) {
-            throw $this->createNotFoundException(
-                'No product found for id '.$id
-            );
+            return new Response('No product found for id '.$id);
+
         }
 
-        return new Response('Check out this great product: '.$product->getName());
+        $deleted_product = $product;
 
-        // or render a templatecom
-        // in the template, print things with {{ product.name }}
-        // return $this->render('product/show.html.twig', ['product' => $product]);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($product);
+        $entityManager->flush();
+
+        return $this->render("products_info.html.twig", [
+            'message' => "The following product has been removed",
+//            'product_id' => $deleted_product->getId(), dlaczego to niedz iałaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+            'product_id' => $id,
+            'product_name' => $deleted_product->getName(),
+            'product_amount' => $deleted_product->getAmount(),
+        ]);
+    }
+
+    /**
+     * @Route("/products/update/{id}/{amount}", name="update_product")
+     */
+    public function updateProduct($id, $amount): Response
+    {
+        $product = $this->getDoctrine()
+            ->getRepository(Product::class)
+            ->find($id);
+
+        if (!$product) {
+            return new Response('No product found for id '.$id);
+        }
+
+        $old_amount = $product->getAmount();
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $product->setAmount($amount);
+        $entityManager->flush();
+        //tutaj niby dlaczeg persist nie jest potrzebny??????????????????????????????????
+        return $this->render("products_info.html.twig", [
+            'message' => "The following product has been updated (old amount: ".$old_amount.")",
+            'product_id' => $product->getId(),
+            'product_name' => $product->getName(),
+            'product_amount' => $product->getAmount(),
+        ]);
     }
 
 }
+
+//jak uzywam extra bndle to juz wywala jak nie znajdzie produktu
+//dlaczego mi dodaje kolejne id mimo że te na początku usunęłam
