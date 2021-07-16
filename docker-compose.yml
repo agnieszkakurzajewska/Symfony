@@ -19,11 +19,11 @@ services: #containers' list
     restart: always
     hostname: symfony_postgres
     environment:
-      POSTGRES_DB: root
+      POSTGRES_DB: symfony_db
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
     ports:
-      - "6543:5432"
+      - "5432:5432"
     volumes:
       - ./postgres:/var/lib/postgres
     networks:
@@ -48,8 +48,6 @@ services: #containers' list
   nginx:
     container_name: symfony_nginx
     image: nginx:stable-alpine
-    ports:
-      - '80:80'
     build:
       context: ./nginx
       dockerfile: Dockerfile-nginx
