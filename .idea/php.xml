@@ -127,6 +127,9 @@
       <path value="$PROJECT_DIR$/symfony/vendor/symfony/flex" />
       <path value="$PROJECT_DIR$/symfony/vendor/symfony/stopwatch" />
       <path value="$PROJECT_DIR$/symfony/vendor/symfony/mailer" />
+      <path value="$PROJECT_DIR$/symfony/vendor/willdurand/jsonp-callback-validator" />
+      <path value="$PROJECT_DIR$/symfony/vendor/willdurand/negotiation" />
+      <path value="$PROJECT_DIR$/symfony/vendor/friendsofsymfony/rest-bundle" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.1" />
