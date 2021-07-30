@@ -7,9 +7,38 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use FOS\RestBundle\Controller\AbstractFOSRestController;
+use FOS\RestBundle\Controller\Annotations as Rest;
+use Symfony\Component\HttpFoundation\Request;
+use FOS\RestBundle\Controller\Annotations\View;
 
-class ProductController extends AbstractController
+
+class ProductController  extends AbstractFOSRestController
 {
+
+    /**
+     * Creates an Article resoFurce
+     * @Rest\Post("/products")
+     * @param Request $request
+//     * @return View
+     */
+    public function postProduct(Request $request) : Response
+    {
+        $product = new Product();
+        $product->setName($request->get('name'));
+        $product->setAmount($request->get('amount'));
+        $entityManager = $this->getDoctrine()->getManager();
+
+        // tell Doctrine you want to (eventually) save the Product (no queries yet)
+        $entityManager->persist($product);
+
+        // actually executes the queries (i.e. the INSERT query)
+        $entityManager->flush();        // In case our POST was a success we need to return a 201 HTTP CREATED response
+//        return View::create($product, Response::HTTP_CREATED);
+        return new Response(
+            Response::HTTP_CREATED
+        );
+    }
 
     /**
      * @Route("/products/add", name="add_product")

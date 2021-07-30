@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInita1197e84ccaec135fa7dee8fad35ae4c
+class ComposerStaticInit06514dc84db749fe97af2a15717a724e
 {
     public static $files = array (
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
@@ -116,6 +116,7 @@ class ComposerStaticInita1197e84ccaec135fa7dee8fad35ae4c
             'Prophecy\\' => 9,
             'PhpParser\\' => 10,
             'PackageVersions\\' => 16,
+            'PHPStan\\PhpDocParser\\' => 21,
         ),
         'N' => 
         array (
@@ -124,12 +125,18 @@ class ComposerStaticInita1197e84ccaec135fa7dee8fad35ae4c
         'M' => 
         array (
             'Monolog\\' => 8,
+            'Metadata\\' => 9,
         ),
         'L' => 
         array (
             'Laminas\\ZendFrameworkBridge\\' => 28,
             'Laminas\\EventManager\\' => 21,
             'Laminas\\Code\\' => 13,
+        ),
+        'J' => 
+        array (
+            'JMS\\Serializer\\' => 15,
+            'JMS\\SerializerBundle\\' => 21,
         ),
         'F' => 
         array (
@@ -484,6 +491,10 @@ class ComposerStaticInita1197e84ccaec135fa7dee8fad35ae4c
         array (
             0 => __DIR__ . '/..' . '/composer/package-versions-deprecated/src/PackageVersions',
         ),
+        'PHPStan\\PhpDocParser\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src',
+        ),
         'Negotiation\\' => 
         array (
             0 => __DIR__ . '/..' . '/willdurand/negotiation/src/Negotiation',
@@ -491,6 +502,10 @@ class ComposerStaticInita1197e84ccaec135fa7dee8fad35ae4c
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
+        ),
+        'Metadata\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jms/metadata/src',
         ),
         'Laminas\\ZendFrameworkBridge\\' => 
         array (
@@ -503,6 +518,14 @@ class ComposerStaticInita1197e84ccaec135fa7dee8fad35ae4c
         'Laminas\\Code\\' => 
         array (
             0 => __DIR__ . '/..' . '/laminas/laminas-code/src',
+        ),
+        'JMS\\Serializer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jms/serializer/src',
+        ),
+        'JMS\\SerializerBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jms/serializer-bundle',
         ),
         'FOS\\RestBundle\\' => 
         array (
@@ -1197,10 +1220,10 @@ class ComposerStaticInita1197e84ccaec135fa7dee8fad35ae4c
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInita1197e84ccaec135fa7dee8fad35ae4c::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInita1197e84ccaec135fa7dee8fad35ae4c::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInita1197e84ccaec135fa7dee8fad35ae4c::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInita1197e84ccaec135fa7dee8fad35ae4c::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit06514dc84db749fe97af2a15717a724e::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit06514dc84db749fe97af2a15717a724e::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit06514dc84db749fe97af2a15717a724e::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit06514dc84db749fe97af2a15717a724e::$classMap;
 
         }, null, ClassLoader::class);
     }
