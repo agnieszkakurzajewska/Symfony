@@ -10,7 +10,7 @@ if (in_array(PHP_SAPI, ['cli', 'phpdbg'], true)) {
 }
 
 require dirname(__DIR__, 3).'/vendor/autoload.php';
-require __DIR__.'/ContainerMQtrapz/srcApp_KernelDevDebugContainer.php';
+require __DIR__.'/ContainerPO3MOEx/srcApp_KernelDevDebugContainer.php';
 
 $classes = [];
 $classes[] = 'Symfony\Bundle\FrameworkBundle\FrameworkBundle';
@@ -228,8 +228,11 @@ $classes[] = 'Symfony\Component\Form\Extension\Validator\Type\SubmitTypeValidato
 $classes[] = 'Symfony\Component\Form\Extension\Validator\Type\UploadValidatorExtension';
 $classes[] = 'Symfony\Bridge\Doctrine\Form\DoctrineOrmTypeGuesser';
 $classes[] = 'Symfony\Component\Form\Extension\Validator\ValidatorTypeGuesser';
+$classes[] = 'FOS\RestBundle\EventListener\FormatListener';
+$classes[] = 'FOS\RestBundle\Negotiation\FormatNegotiator';
 $classes[] = 'FOS\RestBundle\View\ViewHandler';
 $classes[] = 'FOS\RestBundle\Serializer\SymfonySerializerAdapter';
+$classes[] = 'FOS\RestBundle\EventListener\ViewResponseListener';
 $classes[] = 'Symfony\Component\HttpKernel\Fragment\InlineFragmentRenderer';
 $classes[] = 'Sensio\Bundle\FrameworkExtraBundle\Request\ArgumentNameConverter';
 $classes[] = 'Sensio\Bundle\FrameworkExtraBundle\EventListener\IsGrantedListener';
