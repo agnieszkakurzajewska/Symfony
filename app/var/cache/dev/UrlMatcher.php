@@ -13,9 +13,10 @@ return [
         '/_profiler/search_bar' => [[['_route' => '_profiler_search_bar', '_controller' => 'web_profiler.controller.profiler::searchBarAction'], null, null, null, false, false, null]],
         '/_profiler/phpinfo' => [[['_route' => '_profiler_phpinfo', '_controller' => 'web_profiler.controller.profiler::phpinfoAction'], null, null, null, false, false, null]],
         '/_profiler/open' => [[['_route' => '_profiler_open_file', '_controller' => 'web_profiler.controller.profiler::openAction'], null, null, null, false, false, null]],
-        '/products/add' => [[['_route' => 'add_product', '_controller' => 'App\\Controller\\ProductController::addProduct'], null, null, null, false, false, null]],
-        '/products/available' => [[['_route' => 'show_available_products', '_controller' => 'App\\Controller\\ProductController::availableProducts'], null, null, null, false, false, null]],
-        '/products/more-than-five' => [[['_route' => 'show_more_than_five_products', '_controller' => 'App\\Controller\\ProductController::moreThanFiveProducts'], null, null, null, false, false, null]],
+        '/products/add' => [[['_route' => 'add_product', '_controller' => 'App\\Controller\\Api\\ProductController::addProduct'], null, null, null, false, false, null]],
+        '/products/available' => [[['_route' => 'show_available_products', '_controller' => 'App\\Controller\\Api\\ProductController::availableProducts'], null, null, null, false, false, null]],
+        '/products/more-than-five' => [[['_route' => 'show_more_than_five_products', '_controller' => 'App\\Controller\\Api\\ProductController::moreThanFiveProducts'], null, null, null, false, false, null]],
+        '/' => [[['_route' => 'app_web_main_main', '_controller' => 'App\\Controller\\Web\\MainController::main'], null, null, null, false, false, null]],
     ],
     [ // $regexpList
         0 => '{^(?'
@@ -49,10 +50,10 @@ return [
         136 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception_panel::body'], ['token'], null, null, false, false, null]],
         149 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
         159 => [[['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null]],
-        195 => [[['_route' => 'show_product', '_controller' => 'App\\Controller\\ProductController::showProduct'], ['id'], null, null, false, true, null]],
-        218 => [[['_route' => 'delete_product', '_controller' => 'App\\Controller\\ProductController::deleteProduct'], ['id'], null, null, false, true, null]],
+        195 => [[['_route' => 'show_product', '_controller' => 'App\\Controller\\Api\\ProductController::showProduct'], ['id'], null, null, false, true, null]],
+        218 => [[['_route' => 'delete_product', '_controller' => 'App\\Controller\\Api\\ProductController::deleteProduct'], ['id'], null, null, false, true, null]],
         250 => [
-            [['_route' => 'update_product', '_controller' => 'App\\Controller\\ProductController::updateProduct'], ['id', 'amount'], null, null, false, true, null],
+            [['_route' => 'update_product', '_controller' => 'App\\Controller\\Api\\ProductController::updateProduct'], ['id', 'amount'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
     ],

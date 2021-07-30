@@ -62,12 +62,14 @@ class __TwigTemplate_eab5b34e4af4f989f347ba67975dff28055439837d882d1d93439ed4e97
         // line 12
         $this->displayBlock('javascripts', $context, $blocks);
         // line 15
-        echo "    </head>
+        echo "
+        Nie jest kolorowo
+    </head>
     <body>
         ";
-        // line 17
+        // line 19
         $this->displayBlock('body', $context, $blocks);
-        // line 18
+        // line 20
         echo "    </body>
 </html>
 ";
@@ -142,7 +144,7 @@ class __TwigTemplate_eab5b34e4af4f989f347ba67975dff28055439837d882d1d93439ed4e97
 
     }
 
-    // line 17
+    // line 19
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -167,7 +169,7 @@ class __TwigTemplate_eab5b34e4af4f989f347ba67975dff28055439837d882d1d93439ed4e97
 
     public function getDebugInfo()
     {
-        return array (  146 => 17,  136 => 14,  134 => 13,  124 => 12,  114 => 10,  112 => 9,  102 => 8,  83 => 5,  71 => 18,  69 => 17,  65 => 15,  63 => 12,  60 => 11,  57 => 8,  53 => 5,  47 => 1,);
+        return array (  148 => 19,  138 => 14,  136 => 13,  126 => 12,  116 => 10,  114 => 9,  104 => 8,  85 => 5,  73 => 20,  71 => 19,  65 => 15,  63 => 12,  60 => 11,  57 => 8,  53 => 5,  47 => 1,);
     }
 
     public function getSourceContext()
@@ -186,6 +188,8 @@ class __TwigTemplate_eab5b34e4af4f989f347ba67975dff28055439837d882d1d93439ed4e97
         {% block javascripts %}
             {#{{ encore_entry_script_tags('app') }}#}
         {% endblock %}
+
+        Nie jest kolorowo
     </head>
     <body>
         {% block body %}{% endblock %}
