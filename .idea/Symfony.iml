@@ -134,6 +134,14 @@
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/symfony/http-client" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/symfony/stopwatch" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/symfony/flex" />
+      <excludeFolder url="file://$MODULE_DIR$/app/var/cache/dev/pools/B6bT8thjh-" />
+      <excludeFolder url="file://$MODULE_DIR$/app/var/cache/dev/pools/evIH6RvbjK" />
+      <excludeFolder url="file://$MODULE_DIR$/app/var/cache/dev/pools/ktZ1hnNZ3y" />
+      <excludeFolder url="file://$MODULE_DIR$/app/var/cache/dev/pools/NJe4sB0yvq" />
+      <excludeFolder url="file://$MODULE_DIR$/app/var/cache/dev/pools/pbGSzjOivb" />
+      <excludeFolder url="file://$MODULE_DIR$/app/var/cache/dev/pools/yFVOQqnTGu" />
+      <excludeFolder url="file://$MODULE_DIR$/app/var/cache/dev/doctrine" />
+      <excludeFolder url="file://$MODULE_DIR$/app/var/cache/dev/jms_serializer" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
